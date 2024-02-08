@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Flask TODO</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script  type = "text/javascript">
+      function redirect(link) {
+        window.location.href = link;
+     }
+    </script>
+</head>
+  <body>
+  <div class="container">
+    <h2 class="">Add new task:</h2>
+    <form method="POST" action="/">
+         <div class="input-group mb-3">
+              <input type="text" name="text" class="form-control" placeholder="">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit" value="update">Add </button>
+                  </div>
+            </div>
+    </form>
+
+    {% for task in tasks %}
+      <p>
+        <form method="POST" action="/edit/{{task.id}}">
+            <div class="input-group mb-3">
+
+
+              <input type="text" title="{{task.dateAdded}}" value="{{task.text}}" name="text" class="form-control">
+              
+
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit" value="update">Update</button>
+              </div>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                    <input type="hidden" name="completed" value="off">
+                    <input type="button" class="btn btn-danger" onclick="redirect('/edit/{{task.id}}')" data-target="/edit/{{task.id}}" name="completed">
+                </div>
+              </div>
+              
+            </div>
+        </form>
+      {% endfor %}
+  </div>
+  </body>
+</html>
